@@ -1,2 +1,5 @@
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=tailscale/tailscale
 TAILSCALE_VERSION: 1.72.1
+
+# renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=iproute2/iproute2
+IPROUTE2_VERSION: 6.10.0

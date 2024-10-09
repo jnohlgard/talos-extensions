@@ -75,6 +75,7 @@ TARGETS += iscsi-tools
 TARGETS += kata-containers
 TARGETS += mdadm
 TARGETS += mei
+TARGETS += iproute2
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit-lts
 TARGETS += nvidia-container-toolkit-production

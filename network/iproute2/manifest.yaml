@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: iproute2
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    System extension adding iproute2 tools (ip, ss, tc, bridge, etc.)
+  compatibility:
+    talos:
+      version: ">= v1.0.0"

@@ -1,0 +1,51 @@
+name: iproute2
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-{{ .IPROUTE2_VERSION }}.tar.xz
+        destination: iproute2.tar.xz
+        sha256: 91a62f82737b44905a00fa803369c447d549e914e9a2a4018fdd75b1d54e8dce
+        sha512: 706479aa37a25fcf30c525c6abd85e0861e484d046e0636a28dbc52b958d45c9dba70b912f530dedd4b0b496e4b98969e23501bbbb41d3de50810bae014fcb41
+    prepare:
+      - |
+        tar -xJf iproute2.tar.xz --strip-components=1
+        rm -f iproute2.tar.xz
+      - |
+        mkdir -p /usr/lib/pkgconfig
+        ln -s /toolchain/lib/pkgconfig/libcap.pc \
+          /usr/lib/pkgconfig/
+      - |
+        export PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig
+
+        PKG_CONFIG='pkg-config --static' \
+          ./configure \
+            --prefix=/usr/local
+        sed -e '1iLDLIBS += -static' -i config.mk
+        sed -e '/^SUBDIRS/ s/man//' -i Makefile
+
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/share/
+        make install DESTDIR=/rootfs
+        mv -t /rootfs/usr/local/ /rootfs/sbin
+        mv -t /rootfs/usr/local/share/ /rootfs/usr/share/iproute2
+        rm -rf /rootfs/usr/{share,include}
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
