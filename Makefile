@@ -108,6 +108,7 @@ TARGETS += revpi-firmware
 TARGETS += spin
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
+TARGETS += tegra-firmware
 TARGETS += tenstorrent
 TARGETS += thunderbolt
 TARGETS += uinput

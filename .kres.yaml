@@ -53,6 +53,7 @@ spec:
     - spin
     - stargz-snapshotter
     - tailscale
+    - tegra-firmware
     - tenstorrent
     - thunderbolt
     - uinput

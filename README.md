@@ -82,6 +82,7 @@ tiers based on support level:
 | [qlogic-firmware](firmware/qlogic-firmware) | :green_square: core | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware) | `20250808` |  This system extension provides firmware for QLogic devices. |
 | [realtek-firmware](firmware/realtek-firmware) | :green_square: core | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware) | `20250808` |  This system extension provides realtek firmware binaries. |
 | [revpi-firmware](firmware/revpi-firmware) | :white_large_square: contrib | [ghcr.io/siderolabs/revpi-firmware](https://github.com/siderolabs/extensions/pkgs/container/revpi-firmware) | `v1.0.0` |  This system extension provides tools e.g. udev rules for the RevolutionPi platform. |
+| [tegra-firmware](firmware/tegra-firmware/) | :white_large_square: contrib | [ghcr.io/siderolabs/tegra-firmware](https://github.com/siderolabs/extensions/pkgs/container/tegra-firmware) | `36.4.4-20250616085344` | NVIDIA Tegra firmware binaries for NVIDIA Jetson platforms |
 
 ### Direct Rendering Manager (DRM)
 
