@@ -1,0 +1,37 @@
+name: tegra-firmware
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://repo.download.nvidia.com/jetson/t234/pool/main/n/nvidia-l4t-firmware/nvidia-l4t-firmware_{{ .L4T_FIRMWARE_VERSION }}_arm64.deb
+        destination: nvidia-l4t-firmware.deb
+        sha256: {{ .L4T_FIRMWARE_SHA256 }}
+        sha512: {{ .L4T_FIRMWARE_SHA512 }}
+      - url: https://repo.download.nvidia.com/jetson/t234/pool/main/n/nvidia-l4t-xusb-firmware/nvidia-l4t-xusb-firmware_{{ .L4T_XUSB_FIRMWARE_VERSION }}_arm64.deb
+        destination: nvidia-l4t-xusb-firmware.deb
+        sha256: {{ .L4T_XUSB_FIRMWARE_SHA256 }}
+        sha512: {{ .L4T_XUSB_FIRMWARE_SHA512 }}
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        ar p nvidia-l4t-firmware.deb data.tar.zst | tar --zstd --no-same-permissions -x
+      - |
+        ar p nvidia-l4t-xusb-firmware.deb data.tar.zst | tar --zstd --no-same-permissions -x
+    install:
+      - |
+        mkdir -p /rootfs/usr/lib/firmware
+        cp -R -L lib/firmware/. /rootfs/usr/lib/firmware/.
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

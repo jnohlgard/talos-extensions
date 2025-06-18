@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: tegra-firmware
+  version: "$VERSION"
+  author: Joakim Nohlgård
+  description: |
+    This system extension provides NVIDIA Tegra firmware blobs.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
