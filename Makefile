@@ -99,6 +99,7 @@ TARGETS += nvidia-fabricmanager-lts
 TARGETS += nvidia-fabricmanager-production
 TARGETS += nvidia-open-gpu-kernel-modules-lts
 TARGETS += nvidia-open-gpu-kernel-modules-production
+TARGETS += nvidia-tegra-kernel-modules
 TARGETS += nvme-cli
 TARGETS += panfrost
 TARGETS += qemu-guest-agent

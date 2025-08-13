@@ -44,6 +44,7 @@ spec:
     - nvidia-fabricmanager-production
     - nvidia-open-gpu-kernel-modules-lts
     - nvidia-open-gpu-kernel-modules-production
+    - nvidia-tegra-kernel-modules
     - nvme-cli
     - panfrost
     - qemu-guest-agent

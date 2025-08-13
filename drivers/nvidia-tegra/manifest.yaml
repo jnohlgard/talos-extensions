@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: nvidia-tegra-kernel-modules
+  version: "$VERSION"
+  author: Joakim Nohlgård
+  description: |
+    This system extension provides drivers for the integrated GPU, network, and other components of NVIDIA Tegra platforms as kernel modules built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
